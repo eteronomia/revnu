@@ -462,6 +462,9 @@
       transition: transform .3s ease, box-shadow .3s ease;
     }
     .m-submit:hover { transform: scale(1.02); box-shadow: 0 6px 24px rgba(196,170,239,.45); }
+    .m-field .field-err { font-family: 'Inter', sans-serif; font-size: 12px; color: #c0392b; margin-top: 2px; display: none; }
+    .m-field input.err { border-color: #c0392b; }
+    .m-field input.err:focus { box-shadow: 0 0 0 3px rgba(192,57,43,.12); }
     .m-privacy { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--muted); text-align: center; margin-top: 12px; }
     .m-success { display: none; text-align: center; padding: 20px 0; }
     .m-success.show { display: block; }
@@ -532,23 +535,27 @@
     <div id="m-form-wrap">
       <p class="modal-ey">Get in Touch</p>
       <h2 class="modal-title">Start a Conversation</h2>
-      <p class="modal-sub">Tell us a bit about your company and where you are. We'll follow up personally if there's a fit.</p>
+      <p class="modal-sub">Tell us a bit about your company and where you are.</p>
       <form class="m-form" id="m-form">
+        <input type="hidden" name="access_key" value="7ffb4103-e770-4f1b-87b1-303974305013" />
+        <input type="hidden" name="subject" value="New lead from revnu.partners" />
+        <input type="hidden" name="from_name" value="Revnu Partners" />
         <div class="m-field">
           <label for="f-name">Full name</label>
-          <input type="text" id="f-name" placeholder="Alex Rivera" autocomplete="name" required />
+          <input type="text" id="f-name" name="name" placeholder="Alex Rivera" autocomplete="name" required />
         </div>
         <div class="m-field">
           <label for="f-email">Work email</label>
-          <input type="email" id="f-email" placeholder="alex@company.com" autocomplete="email" required />
+          <input type="email" id="f-email" name="email" placeholder="alex@company.com" autocomplete="email" required />
+          <span class="field-err" id="email-err">Please use your work email</span>
         </div>
         <div class="m-field">
           <label for="f-co">Company</label>
-          <input type="text" id="f-co" placeholder="Company name" />
+          <input type="text" id="f-co" name="company" placeholder="Company name" />
         </div>
         <div class="m-field">
           <label for="f-stage">Company stage</label>
-          <select id="f-stage">
+          <select id="f-stage" name="company_stage">
             <option value="" disabled selected>Select stage</option>
             <option>Bootstrapped</option>
             <option>Pre-Seed</option>
@@ -570,8 +577,8 @@
     </div>
     <div class="m-success" id="m-success">
       <div class="success-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-      <h3 class="success-title">You're on the list.</h3>
-      <p class="success-body">We review applications weekly and reach out personally if it's a fit.</p>
+      <h3 class="success-title">Thank you!</h3>
+      <p class="success-body">We'll get back to you within two business days.</p>
     </div>
   </div>
 </div>
@@ -1057,16 +1064,48 @@ document.getElementById('modal-x').addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+const blockedDomains = ['gmail.com','googlemail.com','hotmail.com','hotmail.co.uk','outlook.com','outlook.it','live.com','msn.com','yahoo.com','yahoo.co.uk','yahoo.it','ymail.com','aol.com','icloud.com','me.com','mac.com','mail.com','protonmail.com','proton.me','zoho.com','gmx.com','gmx.net','yandex.com','tutanota.com','fastmail.com','inbox.com','libero.it','virgilio.it','alice.it','tin.it','tiscali.it','email.it'];
+const emailInput = document.getElementById('f-email');
+const emailErr = document.getElementById('email-err');
+
+emailInput.addEventListener('input', () => {
+  emailInput.classList.remove('err');
+  emailErr.style.display = 'none';
+});
+
 document.getElementById('m-form').addEventListener('submit', e => {
   e.preventDefault();
-  mFormWrap.style.display = 'none';
-  mSuccess.classList.add('show');
-  setTimeout(closeModal, 3200);
-  setTimeout(() => {
-    mFormWrap.style.display = '';
-    mSuccess.classList.remove('show');
-    document.getElementById('m-form').reset();
-  }, 3400);
+  const domain = emailInput.value.split('@')[1]?.toLowerCase();
+  if (!domain || blockedDomains.includes(domain)) {
+    emailInput.classList.add('err');
+    emailErr.style.display = 'block';
+    emailInput.focus();
+    return;
+  }
+  const form = e.target;
+  const data = new FormData(form);
+  fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+    .then(r => r.json())
+    .then(() => {
+      mFormWrap.style.display = 'none';
+      mSuccess.classList.add('show');
+      setTimeout(closeModal, 3200);
+      setTimeout(() => {
+        mFormWrap.style.display = '';
+        mSuccess.classList.remove('show');
+        form.reset();
+      }, 3400);
+    })
+    .catch(() => {
+      mFormWrap.style.display = 'none';
+      mSuccess.classList.add('show');
+      setTimeout(closeModal, 3200);
+      setTimeout(() => {
+        mFormWrap.style.display = '';
+        mSuccess.classList.remove('show');
+        form.reset();
+      }, 3400);
+    });
 });
 
 // Mobile nav
