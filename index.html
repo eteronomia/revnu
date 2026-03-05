@@ -6,20 +6,33 @@
   <title>Revnu Partners | GTM Advisory for B2B Founders</title>
   <meta name="description" content="Revnu Partners rebuilds commercial infrastructure for growth companies. Infrastructure, outbound, sales systems, and AI automation, rebuilt on your stack and transferred to your team." />
 
+  <!-- SEO -->
+  <link rel="canonical" href="https://revnu.partners/" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Revnu Partners" />
+  <meta name="theme-color" content="#F2EDE4" />
+
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- Open Graph (LinkedIn, social sharing) -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Revnu Partners" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Revnu Partners | GTM Advisory for B2B Founders" />
   <meta property="og:description" content="Infrastructure, outbound, sales systems, and AI automation. Rebuilt on your stack and transferred to your team." />
-  <meta property="og:url" content="https://revnu.partners" />
+  <meta property="og:url" content="https://revnu.partners/" />
   <meta property="og:image" content="https://revnu.partners/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Revnu Partners - GTM Advisory for B2B Founders" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Revnu Partners | GTM Advisory for B2B Founders" />
   <meta name="twitter:description" content="Infrastructure, outbound, sales systems, and AI automation. Rebuilt on your stack and transferred to your team." />
+  <meta name="twitter:image" content="https://revnu.partners/og-image.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -129,7 +142,7 @@
 
     /* Mobile overlay */
     .mob-overlay {
-      display: none; position: fixed; inset: 0; background: var(--cream); z-index: 999;
+      display: none; position: fixed; inset: 0; background: var(--cream); z-index: 1001;
       flex-direction: column; align-items: center; justify-content: center; gap: 40px;
     }
     .mob-overlay.open { display: flex; }
@@ -490,6 +503,23 @@
       #problems, #process, #about { padding: 80px 0; }
     }
   </style>
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Revnu Partners",
+    "url": "https://revnu.partners",
+    "description": "GTM advisory for B2B founders. We rebuild commercial infrastructure: outbound, sales systems, and AI automation.",
+    "areaServed": "Worldwide",
+    "serviceType": ["GTM Advisory", "Sales Infrastructure", "Outbound Systems", "AI Automation"],
+    "knowsAbout": ["B2B Sales", "Go-to-Market Strategy", "Sales Automation", "Revenue Operations", "CRM Implementation"],
+    "sameAs": [
+      "https://linkedin.com"
+    ]
+  }
+  </script>
 </head>
 <body>
 
