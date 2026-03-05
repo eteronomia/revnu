@@ -447,12 +447,13 @@
     .m-form { display: flex; flex-direction: column; gap: 14px; }
     .m-field { display: flex; flex-direction: column; gap: 6px; }
     .m-field label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: #1A1A1A; }
-    .m-field input, .m-field select {
+    .m-field input, .m-field select, .m-field textarea {
       font-family: 'Inter', sans-serif; font-size: 15px; color: #1A1A1A;
       background: #F7F5F2; border: 1px solid rgba(0,0,0,.08); border-radius: 10px; padding: 12px 16px;
       outline: none; transition: border-color .2s; -webkit-appearance: none; appearance: none;
     }
-    .m-field input:focus, .m-field select:focus { border-color: var(--lav); box-shadow: 0 0 0 3px rgba(196,170,239,.15); }
+    .m-field textarea { resize: vertical; min-height: 80px; }
+    .m-field input:focus, .m-field select:focus, .m-field textarea:focus { border-color: var(--lav); box-shadow: 0 0 0 3px rgba(196,170,239,.15); }
     .m-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6560' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
     .m-submit {
       background: var(--lav); color: #1A1A1A; border: none; border-radius: 100px; padding: 16px;
@@ -570,6 +571,10 @@
             <option>Enterprise</option>
             <option>Private Equity Backed</option>
           </select>
+        </div>
+        <div class="m-field">
+          <label for="f-msg">How can we help?</label>
+          <textarea id="f-msg" name="message" rows="3" placeholder="Tell us a bit about your situation..."></textarea>
         </div>
         <button type="submit" class="m-submit">Submit</button>
       </form>
