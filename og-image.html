@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  width: 1200px; height: 1200px;
+  background: #F2EDE4;
+  font-family: Georgia, 'Times New Roman', serif;
+  overflow: hidden;
+}
+.center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.logo {
+  font-size: 72px; font-weight: 700; color: #1A1A1A;
+  margin-bottom: 16px; white-space: nowrap;
+}
+.logo span { font-weight: 400; color: #6B6560; }
+.tagline {
+  font-size: 18px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: .15em;
+  color: rgba(60,55,50,.45); white-space: nowrap;
+}
+.accent-top {
+  position: absolute; top: 285px; left: 0; right: 0; height: 4px;
+  background: #C4AAEF; opacity: 0.3;
+}
+.accent-bottom {
+  position: absolute; top: 915px; left: 0; right: 0; height: 4px;
+  background: #C4AAEF; opacity: 0.3;
+}
+.accent-bar {
+  position: absolute; top: 909px; left: 0; right: 0; height: 6px;
+  background: #C4AAEF;
+}
+</style>
+</head>
+<body>
+  <div class="center">
+    <div class="logo"><span>revnu</span>.partners</div>
+    <div class="tagline">GTM Advisory for B2B Founders</div>
+  </div>
+  <div class="accent-bar"></div>
+</body>
+</html>
